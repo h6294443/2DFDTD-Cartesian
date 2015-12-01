@@ -17,7 +17,7 @@
 #include "cuda_functions.h"
 
 
-
+#define GLEW_STATIC
 
 // Forward declarations
 void Cleanup(int iExitCode);
