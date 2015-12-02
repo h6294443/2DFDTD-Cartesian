@@ -256,7 +256,7 @@ void Cleanup(int iExitCode)
 
 bool runFdtdWithFieldDisplay(int argc, char** argv)
 {
-	pickGPU(1);								// Initialize CUDA context
+	pickGPU(0);								// Initialize CUDA context
 
 	//if (false == initializeGL(argc, argv))	// Initialize GL context
 	//	return 0;
