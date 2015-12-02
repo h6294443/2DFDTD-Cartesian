@@ -245,7 +245,6 @@ void initializeGLBuffers()
 ////////////////////////////////////////////////////////////////////////////////
 void Cleanup(int iExitCode)
 {
-	//    cutilSafeCall(cudaGraphicsUnregisterResource(cuda_pbo_destination_resource));
 	cudaGraphicsUnregisterResource(cuda_pbo_destination_resource);
 	deletePBO(&pbo_destination);
 	deleteTexture(&cuda_result_texture);
@@ -257,24 +256,17 @@ void Cleanup(int iExitCode)
 bool runFdtdWithFieldDisplay(int argc, char** argv)
 {
 	pickGPU(0);								// Initialize CUDA context
-
-	//if (false == initializeGL(argc, argv))	// Initialize GL context
-	//	return 0;
 	initializeGL(argc, argv);
 	initializeGLBuffers();					// Initialize GL buffers
 	createColormapOnGpu();					// colormap used to map field intensity
 		
 	// copy data from CPU RAM to GPU global memory
-	if (int ret = copyTMzArraysToDevice() != 0)
-	{
+	if (int ret = copyTMzArraysToDevice() != 0)	{
 		if (ret == 1) printf("Memory allocation error in copyTMzArraysToDevice(). \n\n Exiting.\n");
-		return 0;
-	}
+		return 0;}
 
 	//time(&start);
-
 	glutMainLoop();	// GLUT loop 
-
 	Cleanup(EXIT_FAILURE);
 }
 
